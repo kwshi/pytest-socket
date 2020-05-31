@@ -44,6 +44,12 @@ def _socket_marker(request):
     The last option to set the fixture wins priority.
     The expected behavior is that higher granularity options should override
     lower granularity options.
+
+    TODO: Explore whether this approach is better served via another method,
+    possibly split them between global setup for command line options, and
+    `pytest_runtest_setup`/`pytest_runtest_call` for markers.
+    See https://docs.pytest.org/en/latest/reference.html#std:fixture-pytestconfig
+    See https://docs.pytest.org/en/latest/reference.html#hooks
     """
     if request.config.getoption('--disable-socket'):
         request.getfixturevalue('socket_disabled')

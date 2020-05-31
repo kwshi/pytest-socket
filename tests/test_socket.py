@@ -30,8 +30,9 @@ def assert_socket_blocked(result):
 def test_socket_enabled_by_default(testdir):
     testdir.makepyfile(PYFILE_SOCKET_USED_IN_TEST)
     result = testdir.runpytest("--verbose")
-    result.assert_outcomes(1, 0, 0)
+    result.assert_outcomes(passed=1, skipped=0, failed=0)
     with pytest.raises(BaseException):
+        # Check that the  output does **not** contain the blocked message.
         assert_socket_blocked(result)
 
 
